@@ -12,7 +12,31 @@ let exportedDataMethods = {
 
     async getWorkJsonData() {
         let { data } = await axios.get(workJson);
-        return data
+        return data;
+    },
+
+    async getPeopleJsonById(id) {
+        let peopleApiData = []
+        let { data } = await axios.get(peopleJsonUrl)
+
+        for(const [key,value] of Object.entries(data)) {
+            if (value["id"] == id) peopleApiData.push(value)
+        }
+
+        return peopleApiData[0];
+
+    },
+
+    async getWorkJsonById(id) {
+        let workApiData = []
+        let { data } = await axios.get(workJson)
+
+        for(const [key,value] of Object.entries(data)) {
+            if (value["id"] == id) workApiData.push(value)
+        }
+
+        return workApiData[0];
+
     }
 }
 

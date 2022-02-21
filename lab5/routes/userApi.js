@@ -13,4 +13,16 @@ router.route("/work").get(async (req, res) => {
     res.send(workJsonData);
 })
 
+router.route("/people/:id").get(async (req, res) => {
+    const numId = parseInt(req.params.id)
+    const peopleJsonDataById = await apiData.getPeopleJsonById(numId);
+    res.send(peopleJsonDataById);
+});
+
+router.route("/work/:id").get(async (req, res) => {
+    const numId = parseInt(req.params.id)
+    const workJsonDataById = await apiData.getWorkJsonById(numId);
+    res.send(workJsonDataById);
+});
+
 module.exports = router;
