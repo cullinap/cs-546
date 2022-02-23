@@ -31,7 +31,6 @@ let exportedDataMethods = {
 
         if(peopleApiData.length === 0) throw `no person with that id`
         return peopleApiData[0];
-
     },
 
     async getWorkJsonById(id) {
@@ -50,7 +49,6 @@ let exportedDataMethods = {
 
         if(workApiData.length === 0) throw `no company with that id`
         return workApiData[0];
-
     }
 }
 
