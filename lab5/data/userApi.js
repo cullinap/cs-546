@@ -16,11 +16,14 @@ let exportedDataMethods = {
     },
 
     async getPeopleJsonById(id) {
+        if(!id) throw `you must provide an id`
+        const numId = +id
+
         let peopleApiData = []
         let { data } = await axios.get(peopleJsonUrl)
 
         for(const [key,value] of Object.entries(data)) {
-            if (value["id"] == id) peopleApiData.push(value)
+            if (value["id"] == numId) peopleApiData.push(value)
         }
 
         return peopleApiData[0];
@@ -28,11 +31,14 @@ let exportedDataMethods = {
     },
 
     async getWorkJsonById(id) {
+        if(!id) throw `you must provide an id`
+        const numId = +id
+
         let workApiData = []
         let { data } = await axios.get(workJson)
 
         for(const [key,value] of Object.entries(data)) {
-            if (value["id"] == id) workApiData.push(value)
+            if (value["id"] == numId) workApiData.push(value)
         }
 
         return workApiData[0];

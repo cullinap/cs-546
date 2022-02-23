@@ -4,25 +4,39 @@ const data = require("../data");
 const apiData = data.apiData;
 
 router.route("/people").get(async (req, res) => {
-  const peopleJsonData = await apiData.getPeopleJsonData();
-  res.send(peopleJsonData);
+    try {
+        const peopleJsonData = await apiData.getPeopleJsonData();
+        res.json(peopleJsonData);
+    } catch(e) {
+        res.status(404).json({error:e})
+    }
 });
 
 router.route("/work").get(async (req, res) => {
-    const workJsonData = await apiData.getWorkJsonData();
-    res.send(workJsonData);
-})
+    try {
+        const workJsonData = await apiData.getWorkJsonData();
+        res.json(workJsonData);
+    } catch(e) {
+        res.status(404).json({error:e})
+    } 
+});
 
 router.route("/people/:id").get(async (req, res) => {
-    const numId = parseInt(req.params.id)
-    const peopleJsonDataById = await apiData.getPeopleJsonById(numId);
-    res.send(peopleJsonDataById);
+    try {
+        const peopleJsonDataById = await apiData.getPeopleJsonById(req.params.id);
+        res.json(peopleJsonDataById);
+    } catch(e) {
+        res.status(404).json({error:e})
+    }
 });
 
 router.route("/work/:id").get(async (req, res) => {
-    const numId = parseInt(req.params.id)
-    const workJsonDataById = await apiData.getWorkJsonById(numId);
-    res.send(workJsonDataById);
+    try {
+        const workJsonDataById = await apiData.getWorkJsonById(req.params.id);
+        res.json(workJsonDataById);
+    } catch(e) {
+        res.status(404).json({error:e})
+    }
 });
 
 module.exports = router;
