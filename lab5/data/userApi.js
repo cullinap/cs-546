@@ -18,6 +18,9 @@ let exportedDataMethods = {
     async getPeopleJsonById(id) {
         if(!id) throw `you must provide an id`
         const numId = +id
+        if(numId < 0) throw `id value must be a positive integer`
+        if(isNaN(numId)) throw `id value must be a positive integer`
+        if(typeof numId !== 'number') throw `id value must be a positive integer and not empty`
 
         let peopleApiData = []
         let { data } = await axios.get(peopleJsonUrl)
@@ -33,6 +36,9 @@ let exportedDataMethods = {
     async getWorkJsonById(id) {
         if(!id) throw `you must provide an id`
         const numId = +id
+        if(numId < 0) throw `id value must be a positive integer`
+        if(isNaN(numId)) throw `id value must be a positive integer`
+        if(typeof numId !== 'number') throw `id value must be a positive integer and not empty`
 
         let workApiData = []
         let { data } = await axios.get(workJson)
