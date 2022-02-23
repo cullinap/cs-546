@@ -29,6 +29,7 @@ let exportedDataMethods = {
             if (value["id"] == numId) peopleApiData.push(value)
         }
 
+        if(peopleApiData.length === 0) throw `no person with that id`
         return peopleApiData[0];
 
     },
@@ -47,6 +48,7 @@ let exportedDataMethods = {
             if (value["id"] == numId) workApiData.push(value)
         }
 
+        if(workApiData.length === 0) throw `no company with that id`
         return workApiData[0];
 
     }
