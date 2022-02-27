@@ -55,7 +55,8 @@ async function main() {
     // get object id 
     bandObjectId = await mongo_queries.getBand("Sound Garden");
 
-    badmotorfinger = makeAlbum(
+    // need the await kw otherwise the album won't be entered
+    badmotorfinger = await albums.create(
         bandObjectId,
         "Badmotorfinger",
         1991,
@@ -67,9 +68,23 @@ async function main() {
         ],
         5
     )
+
+    louderThanLove = await albums.create(
+      bandObjectId,
+      "Louder Than Love",
+      1989,
+      [
+        "Ugly Truth",
+        "Hands All Over",
+        "Gun",
+        "Power Trip",
+      ],
+      5
+  )
     
-    const addAnAlbum = await mongo_queries.addAlbum(bandObjectId, badmotorfinger)
-    console.log(addAnAlbum);
+    const addBadMotor = await mongo_queries.addAlbum(bandObjectId, badmotorfinger)
+    const addLouderThanLove = await mongo_queries.addAlbum(bandObjectId, louderThanLove)
+    //console.log(addAnAlbum);
 
   } catch (e) {
     console.log(e);

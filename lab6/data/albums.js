@@ -1,22 +1,24 @@
 const mongoCollections = require("../config/mongoCollections");
 const bands = mongoCollections.bands;
-//const { ObjectId } = require("mongodb");
+const mongo_queries = require("./mongo_queries")
+const { ObjectId } = require("mongodb");
+
 //const { albums } = require(".");
 
 
 module.exports = {
     async create(bandId, title, releaseDate, tracks, rating) {
         
-        //const albumCollection = await albums();
-
         let newAlbum = {
-            bandId: bandId, 
+            _id: new ObjectId(), 
             title: title, 
             releaseDate: releaseDate, 
             tracks: tracks, 
             rating: rating
         }
-        
-        return newAlbum  //formatOneBand(newBand)
+
+        //const addAnAlbum = await mongo_queries.addAlbum(bandId, newAlbum)
+
+        return newAlbum
     }
 }
