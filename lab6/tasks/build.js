@@ -1,5 +1,6 @@
 const bands = require("../data/bands"); // must have two dots for get file
 const albums = require("../data/albums")
+const mongo_queries = require("../data/mongo_queries")
 const connection = require("../config/mongoConnection");
 const mongoCollections = require("../config/mongoCollections");
 //const { albums } = require("../data");
@@ -36,7 +37,7 @@ async function main() {
 
   // 1. create the band
   try {
-    soundGarden = makeBand(
+    soundGarden = await bands.create(
       "Sound Garden",
       ["Grunge", "Alternative", "Metal"],
       "http://www.soundgarden.com",
@@ -49,10 +50,13 @@ async function main() {
         "Jason Everman",
       ],
       1984,
-    )
+    );
+
+    // get object id 
+    bandObjectId = await mongo_queries.getBand("Sound Garden");
 
     badmotorfinger = makeAlbum(
-        1,
+        bandObjectId,
         "Badmotorfinger",
         1991,
         [
@@ -64,11 +68,9 @@ async function main() {
         5
     )
     
-    soundGarden.albums.push(badmotorfinger)
-    const bandCollection = await bands();
-    const insertInfo = await bandCollection.insertOne(newBand);
+    const addAnAlbum = await mongo_queries.addAlbum(bandObjectId, badmotorfinger)
+    console.log(addAnAlbum);
 
-    console.log(soundGarden);
   } catch (e) {
     console.log(e);
   }
