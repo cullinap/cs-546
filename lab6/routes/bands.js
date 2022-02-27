@@ -13,6 +13,33 @@ router.route("/bands").get(async (req, res) => {
     }
 });
 
+router.post('/bands', async (req, res) => {
+    const bandData = req.body;
+    console.log('postman')
+    //console.log(req.body)
+
+    // if (!bandData.name) {
+    //   res.status(400).json({ error: 'You must provide blog post title' });
+    //   return;
+    // }
+    // if (!bandData.genre) {
+    //   res.status(400).json({ error: 'You must provide blog post body' });
+    //   return;
+    // }
+    // if (!bandData.wesbite) {
+    //   res.status(400).json({ error: 'You must provide poster ID' });
+    //   return;
+    // }
+
+    try {
+      const { name, genre, website, recordLabel, bandMembers, yearFormed } = bandData;
+      const newBand = await bands.create(name, genre, website, recordLabel, bandMembers, yearFormed);
+      res.json(newBand);
+    } catch (e) {
+      res.status(500).json({ error: e });
+    }
+  });
+
 module.exports = router;
 
 
