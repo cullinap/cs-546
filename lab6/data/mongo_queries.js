@@ -4,6 +4,20 @@ const { ObjectId } = require("mongodb");
 
 
 module.exports = {
+    getAllBands: async () => {
+        const bandCollection = await bands();
+        const bandList = await bandCollection.find({}).toArray();
+        return bandList;
+      },
+
+    getAllBandsIdAndName: async () => {
+        const bandCollection = await bands();
+        const bandList = await bandCollection
+          .find({}, {projection: {name:1} })
+          .toArray();
+        return bandList;
+      },
+
     getBand: async (bandName) => {
         // if (id === undefined) throw 'You must provide an ID';
         const bandCollection = await bands();

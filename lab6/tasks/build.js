@@ -6,28 +6,6 @@ const mongoCollections = require("../config/mongoCollections");
 //const { albums } = require("../data");
 const getBandInfo = mongoCollections.bands;
 
-const makeBand = function(name, genre, website, recordLabel, bandMembers, yearFormed) {
-    return {
-        name: name,
-        genre: genre,
-        website: website,
-        recordLabel: recordLabel,
-        bandMembers: bandMembers,
-        yearFormed: yearFormed,
-        albums: [],   // initialize as empty array
-        overallRating: 0 // initialize as 0
-    }
-}
-
-const makeAlbum = function(bandId, title, releaseDate, tracks, rating) {
-    return {
-        bandId: bandId, 
-        title: title, 
-        releaseDate: releaseDate, 
-        tracks: tracks, 
-        rating: rating
-    }
-}
 
 async function main() {
   const db = await connection.connectToDb();
