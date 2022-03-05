@@ -70,5 +70,26 @@ module.exports = {
 
     },
 
+    async remove(id) {
+        if(!id) throw `you must provide an id`
+        if(typeof id !== 'string' || id.trim().length === 0) throw `value must be string and not empty`
+
+        id = id.trim()
+        if(!ObjectId.isValid(id)) throw `You must provide a valid object id`
+
+        const bandCollection = await bands();
+
+        return bandCollection
+            .updateOne(
+                { 'albums._id':ObjectId(id) }, 
+                { $pull: { albums: { _id:ObjectId(id) }}}
+        )
+    
+        // if(deleteBand.deletedCount === 0) {
+        //     throw `band does not exist`
+        // }
+
+    },
+
 
 }

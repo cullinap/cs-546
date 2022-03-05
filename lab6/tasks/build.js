@@ -288,6 +288,62 @@ const getSingleAlbumById = async () => {
   console.log("Done!");
 }
 
+const removeAlbumById = async () => {
+  console.log("removing a album by ID")
+  //soundGardenObjId = await mongo_queries.getIdBandWithBandName("Sound Garden")
+  soundGardenAlbumObjId = await mongo_queries.getOneAlbumIdByBandNameAndAlbum("Badmotorfinger");
+  //soundGardenObjIdStr = soundGardenObjId.toString()
+  soundGardenAlbumObjIdStr = soundGardenAlbumObjId.toString()
+  //console.log(soundGardenObjIdStr)
+  console.log(soundGardenAlbumObjIdStr)
+
+  try {
+      const albumList = await albums.remove(soundGardenAlbumObjIdStr);
+      console.log(albumList);
+    } catch(e) {
+      console.log(e);
+    }
+
+//     try {
+//       const bandList = await bands.get(12898);
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+//     try {
+//       const bandList = await bands.get(" ");
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+//     try {
+//       const bandList = await bands.get(soundGardObjectIdStr);
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+//     try {
+//       const bandList = await bands.get(pinkFloydObjectIdStr);
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+//     try {
+//       const bandList = await bands.get("520b1d76ea1c4ade903d75b6f");
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+  const db = await connection.connectToDb();
+  await connection.closeConnection();
+  console.log("Done!");
+}
+
 
 
 //main();
@@ -295,4 +351,5 @@ const getSingleAlbumById = async () => {
 //getById();
 //deleteById();
 //displayAllAlbums();
-getSingleAlbumById()
+//getSingleAlbumById();
+removeAlbumById()
