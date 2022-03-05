@@ -6,12 +6,12 @@ const { update } = require("../data/bands");
 const bands = data.bands;
 const mongoQueries = data.mongo_queries;
 
-router.route("/albums/").get(async (req, res) => {
-//   const bandId = req.params.id
-//   console.log(bandId)
+router.route("/albums/:id").get(async (req, res) => {
+  const bandId = req.params.id
+  console.log(bandId)
 
   try {
-    const bandJson = await mongoQueries.getAllBandsIdAndName();
+    const bandJson = await albums.getAll(bandId)
     res.json(bandJson);
   } catch (e) {
     res.status(404).json({ error: e });
@@ -91,25 +91,25 @@ router.route("/albums/").get(async (req, res) => {
 //   }
 // });
 
-// router.delete("/bands/:id", async (req, res) => {
-//   if(!req.params.id) {
-//     res.status(400).json({ error: 'You must supply an ID to delete'})
-//     return 
-//   }
+router.delete("/albums/:id", async (req, res) => {
+  if(!req.params.id) {
+    res.status(400).json({ error: 'You must supply an ID to delete'})
+    return 
+  }
 
-//   try {
-//     await bands.get(req.params.id);
-//   } catch (e) {
-//     res.status(404).json({ error: "Band not found" });
-//     return;
-//   }
+  try {
+    await albums.get(req.params.id);
+  } catch (e) {
+    res.status(404).json({ error: "Album not found" });
+    return;
+  }
 
-//   try {
-//     const updatedBand = await bands.remove(req.params.id);
-//     res.sendStatus(200);
-//   } catch (e) {
-//     res.status(500).json({ error: e });
-//   }
-// });
+  try {
+    const removeAlbum = await albums.remove(req.params.id);
+    res.sendStatus(200);
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
 
 module.exports = router;
