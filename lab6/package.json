@@ -4,7 +4,6 @@
   "description": "My lab 6 module",
   "main": "app.js",
   "scripts": {
-    "build": "node tasks/seed.js",
     "start": "node app.js",
     "test": "node tasks/build.js"
   },
