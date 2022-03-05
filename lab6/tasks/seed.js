@@ -220,6 +220,113 @@ async function main() {
     4
   ) 
 
+  console.log('adding Misfits') 
+  let misfits = undefined;
+
+  misfits = await bands.create(
+      "Misfits",
+      ["Punk", "Hardcore"],
+      "http://www.misfits.com",
+      "Geffen",
+      [
+        "Jerry Only",
+        "Glenn Danzig",
+        "Dave Lombardo",
+        "Acey Slad",
+      ],
+      1977
+  )
+
+  // get object id
+  bandObjectId = await mongo_queries.getIdBandWithBandName("Misfits");
+
+  const staticAge = await buildAnAlbum (
+    bandObjectId,
+    "Static Age",
+    1996,
+    ["Static Age", "Last Caress", "Hybrid Moments"],
+    5
+  )
+
+  const famousMonsters = await buildAnAlbum (
+    bandObjectId,
+    "Famous Monsters",
+    1998,
+    ["Scream", "Lost in Space", "Witch Hunt"],
+    3
+  ) 
+
+  console.log('adding Dead Kennedys') 
+  let deadKennedys = undefined;
+
+  deadKennedys = await bands.create(
+      "Dead Kennedys",
+      ["Punk", "Hardcore"],
+      "http://www.deadkennedys.com",
+      "Manifesto",
+      [
+        "East Bay Ray",
+        "Ron Greer",
+        "Jeff Penalty",
+        "Ted",
+      ],
+      1978
+  )
+
+  // get object id
+  bandObjectId = await mongo_queries.getIdBandWithBandName("Dead Kennedys");
+
+  const battleForDemocracy = await buildAnAlbum (
+    bandObjectId,
+    "Bedtime for Democracy",
+    1986,
+    ["I Spy", "Fleshdunce", "Dear Abby"],
+    4
+  )
+
+  const plasticSurgergyDisastors = await buildAnAlbum (
+    bandObjectId,
+    "Plastic Surgery Disastors",
+    1982,
+    ["Government Flu", "Buzzpop", "Well Paid Scientist"],
+    3
+  ) 
+
+  console.log('adding The Mars Volta') 
+  let marsVolta = undefined;
+
+  marsVolta = await bands.create(
+      "The Mars Volta",
+      ["Punk", "experimental"],
+      "http://www.marsvolta.com",
+      "Warner Bros",
+      [
+        "Omar Rodriguiez-Lopez",
+        "Cedric Bixler-Zavala",
+        "The Mars Volta Group",
+      ],
+      2001
+  )
+
+  // get object id
+  bandObjectId = await mongo_queries.getIdBandWithBandName("The Mars Volta");
+
+  const delousedInTheComatorium = await buildAnAlbum (
+    bandObjectId,
+    "De-Loused in the Comatorium",
+    2003,
+    ["Son et lumiere", "Roulette Dares", "This Apparatus Must Be Unearthed"],
+    5
+  )
+
+  const francesTheMute = await buildAnAlbum (
+    bandObjectId,
+    "Frances The Mute",
+    2005,
+    ["The Widow", "Cassandra Gemini"],
+    4
+  ) 
+
 
   await connection.closeConnection();
 }
