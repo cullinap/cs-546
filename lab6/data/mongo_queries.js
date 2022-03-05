@@ -18,17 +18,29 @@ module.exports = {
         return bandList;
       },
 
-    getBand: async (bandName) => {
-        // if (id === undefined) throw 'You must provide an ID';
+    getIdBandWithBandName: async (bandName) => {
+        if (bandName === undefined) throw 'You must provide an bandName';
         const bandCollection = await bands();
         const band = await bandCollection.findOne({ name: bandName });
     
-        // if (!movie) {
-        //   throw 'Could not find movie with id of ' + id;
-        // }
+        if (!band) {
+          throw 'Could not find band with name of ' + bandName;
+        }
 
         return band._id
       },
+
+    getBandById: async (id) => {
+      if (id === undefined) throw 'You must provide an id';
+      const bandCollection = await bands();
+      const band = await bandCollection.findOne({ _id: id });
+  
+      if (!band) {
+        throw 'Could not find band with id of ' + id;
+      }
+
+      return band
+    },
 
     addAlbum: async function (id, album) {
         // if (id === undefined) return Promise.reject('No id provided');

@@ -15,8 +15,6 @@ router.route("/bands").get(async (req, res) => {
 
 router.post('/bands', async (req, res) => {
     const bandData = req.body;
-    console.log('postman')
-    //console.log(req.body)
 
     // if (!bandData.name) {
     //   res.status(400).json({ error: 'You must provide blog post title' });
@@ -39,6 +37,15 @@ router.post('/bands', async (req, res) => {
       res.status(500).json({ error: e });
     }
   });
+
+router.route("/bands/:id").get(async (req, res) => {
+    try {
+        const bandById = await bands.get(req.params.id);
+        res.json(bandById);
+    } catch(e) {
+        res.status(404).json({error: e})
+    }
+});
 
 module.exports = router;
 

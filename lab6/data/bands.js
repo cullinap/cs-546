@@ -11,6 +11,8 @@ function formatOneBand(collection) {
     obj["recordLabel"] = collection["recordLabel"]
     obj["bandMembers"] = collection["bandMembers"]
     obj["yearFormed"] = collection["yearFormed"]
+    obj["albums"] = collection["albums"]
+    obj["overallRating"] = collection["overallRating"]
 
     return obj
 }
@@ -20,8 +22,18 @@ function formatOneBand(collection) {
 // we can pass back and forth data to make sub-documents
 // and we can replace the object in create with a function
 
+function formatData(collection, bandIndex) {
+    let obj = {}
+    obj["_id"] = collection[bandIndex]["_id"].toString()
+    obj["name"] = collection[bandIndex]["name"]
+    obj["genre"] = collection[bandIndex]["genre"]
+    obj["website"] = collection[bandIndex]["website"]
+    obj["recordLabel"] = collection[bandIndex]["recordLabel"]
+    obj["bandMembers"] = collection[bandIndex]["bandMembers"]
+    obj["yearFormed"] = collection[bandIndex]["yearFormed"]
 
-
+    return obj
+}
 
 
 module.exports = {
@@ -85,6 +97,51 @@ module.exports = {
         const insertInfo = await bandCollection.insertOne(newBand);
         
         return formatOneBand(newBand)
+    },
+    async getAll() {
+        const bandCollection = await bands();
+        const bandsList = await bandCollection.find({}).toArray();
+        if(!bandsList) throw `Band list is empty`
+        
+        let bandArray = []
+        for(let i = 0; i<bandsList.length; ++i) {
+            bandArray.push(formatData(bandsList, i))
+        }
+
+        return bandArray
+    },
+
+    async get(id) {
+        if(!id) throw `you must provide an id`;
+        if(typeof id !== 'string' || id.trim().length === 0) throw `value must be string and not empty`
+        
+        id = id.trim();
+        if(!ObjectId.isValid(id)) throw `must provide a valid object id`
+
+        const bandCollection = await bands();
+        const findBand = await bandCollection.findOne({_id:ObjectId(id)});
+        
+        if(findBand === null) throw `no band with that id`
+        
+        return formatOneBand(findBand)
+    },
+
+    async remove(id) {
+        if(!id) throw `you must provide an id`
+        if(typeof id !== 'string' || id.trim().length === 0) throw `value must be string and not empty`
+
+        id = id.trim()
+        if(!ObjectId.isValid(id)) throw `You must provide a valid object id`
+
+        const bandCollection = await bands();
+        const findBand = await bandCollection.findOne({_id:ObjectId(id)});
+        const deleteBand = await bandCollection.deleteOne({_id:ObjectId(id)})
+
+        if(deleteBand.deletedCount === 0) {
+            throw `band does not exist`
+        }
+
+        return findBand["name"] + " has been successfully deleted!";
     },
 
 }
