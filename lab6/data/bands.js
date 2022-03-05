@@ -144,4 +144,30 @@ module.exports = {
         return findBand["name"] + " has been successfully deleted!";
     },
 
+    async update(id, name, genre, website, recordLabel, bandMembers, yearFormed) {
+
+        const bandCollection = await bands();
+
+        const updateBand = {
+                    name: name,
+                    genre: genre,
+                    website: website,
+                    recordLabel: recordLabel,
+                    bandMembers: bandMembers,
+                    yearFormed: yearFormed,
+                    albums: [],
+                    overallRating: 0
+                }
+
+        const updatedBandInfo = await bandCollection
+            .updateOne(
+                {_id:ObjectId(id)},
+                {$set:updateBand}
+        )
+
+        return updatedBandInfo
+
+    },
+
+
 }

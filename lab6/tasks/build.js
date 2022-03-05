@@ -344,6 +344,63 @@ const removeAlbumById = async () => {
   console.log("Done!");
 }
 
+const updateBand = async () => {
+  console.log("updating a band")
+  soundGardenObjId = await mongo_queries.getIdBandWithBandName("Nirvana")
+  let newName = "Nudedragons"
+  let newGenre = ["classical grunge"]
+  let newWebsite = "http://www.espn.com"
+  let newRecordLabel = "Spotify"
+  let newBandMembers = ["Ozzy"]
+  let newYearFormed = 2020
+
+  try {
+      const updaDatedBand = await bands.update(soundGardenObjId, newName, newGenre, newWebsite, newRecordLabel, newBandMembers, newYearFormed);
+      console.log(updaDatedBand);
+    } catch(e) {
+      console.log(e);
+    }
+
+//     try {
+//       const bandList = await bands.get(12898);
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+//     try {
+//       const bandList = await bands.get(" ");
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+//     try {
+//       const bandList = await bands.get(soundGardObjectIdStr);
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+//     try {
+//       const bandList = await bands.get(pinkFloydObjectIdStr);
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+//     try {
+//       const bandList = await bands.get("520b1d76ea1c4ade903d75b6f");
+//       console.log(bandList);
+//     } catch(e) {
+//       console.log(e);
+//     }
+
+  const db = await connection.connectToDb();
+  await connection.closeConnection();
+  console.log("Done!");
+}
+
 
 
 //main();
@@ -352,4 +409,5 @@ const removeAlbumById = async () => {
 //deleteById();
 //displayAllAlbums();
 //getSingleAlbumById();
-removeAlbumById()
+//removeAlbumById()
+updateBand()
