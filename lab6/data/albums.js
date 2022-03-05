@@ -34,8 +34,41 @@ module.exports = {
                 {_id:ObjectId(id)},
                 { projection: { _id:0, albums:1 } }
             )
+        
+        albumArr = []
+        Object.entries(bandAlbums).forEach(
+            ([ _ , value]) => albumArr.push(value)
+        )
 
-        return typeof bandAlbums
+        return albumArr[0]
         
     },
+
+    async get(id) {
+        if(!id) throw `you must provide an id`;
+        if(typeof id !== 'string' || id.trim().length === 0) throw `value must be string and not empty`
+        
+        id = id.trim();
+        if(!ObjectId.isValid(id)) throw `must provide a valid object id`
+
+        const bandCollection = await bands();
+        const findAlbum = await bandCollection
+            .findOne(
+                {'albums._id':ObjectId(id)}
+            )
+
+
+        if(findAlbum === null) throw `no album with that id`
+
+        arr = []
+        Object.values(findAlbum.albums).forEach(val => {
+            if(val._id.toString() === id.toString()) arr.push(val)
+        })
+
+       arr[0]["_id"] = arr[0]["_id"].toString()
+       return arr[0]
+
+    },
+
+
 }

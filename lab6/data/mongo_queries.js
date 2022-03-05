@@ -54,5 +54,25 @@ module.exports = {
         //   .then(function () {
         //     return module.exports.getMovie(id);
         //   });
-      },
+    },
+
+    getOneAlbumIdByBandNameAndAlbum: async function (album) {
+
+      const bandCollection = await bands();
+
+      const bandAlbums = await bandCollection
+          .findOne( 
+               {'albums.title':album}
+          )
+
+        arr = []
+        Object.values(bandAlbums.albums).forEach(val => {
+            if(val.title === album) arr.push(val)
+        })
+
+        return arr[0]["_id"]
+
+    },
+
+
 }
