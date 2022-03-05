@@ -327,6 +327,77 @@ async function main() {
     4
   ) 
 
+  console.log('adding At the Drive In') 
+  let atTheDriveIn = undefined;
+
+  atTheDriveIn = await bands.create(
+      "At the Drive In",
+      ["Punk", "experimental"],
+      "http://www.atthedrivein.com",
+      "Rise",
+      [
+        "Omar Rodriguiez-Lopez",
+        "Cedric Bixler-Zavala",
+        "Jim Ward",
+      ],
+      1994
+  )
+
+  // get object id
+  bandObjectId = await mongo_queries.getIdBandWithBandName("At the Drive In");
+
+  const relationsshipOfCommand = await buildAnAlbum (
+    bandObjectId,
+    "Relationship of Command",
+    2000,
+    ["One Armed Scissor", "Rolodex Propoganda", "Invalid Litter Dept"],
+    4
+  )
+
+  const acrobaticTenement = await buildAnAlbum (
+    bandObjectId,
+    "Acrobatic Tenement",
+    1997,
+    ["Star Slight", "Paid Vacation Time"],
+    4
+  ) 
+
+  console.log('adding Led Zeppelin') 
+  let ledZeppelin = undefined;
+
+  ledZeppelin = await bands.create(
+      "Led Zeppelin",
+      ["rock", "blues"],
+      "http://www.ledzeppelin.com",
+      "Atlantic",
+      [
+        "John Bonham",
+        "Jimmy Page",
+        "Robert Plant",
+        "John Paul Jones"
+      ],
+      1968
+  )
+
+  // get object id
+  bandObjectId = await mongo_queries.getIdBandWithBandName("Led Zeppelin");
+
+  const ledZeppelinOne = await buildAnAlbum (
+    bandObjectId,
+    "Led Zeppelin",
+    1969,
+    ["Good Times Bad Times", "Dazed and Confused", "Babe I'm Gonna Leave You"],
+    4
+  )
+
+  const ledZeppelinTwo = await buildAnAlbum (
+    bandObjectId,
+    "Led Zeppelin II",
+    1969,
+    ["Whole Lotta Love", "The Lemon Song", "Moby Dick"],
+    4
+  ) 
+
 
   await connection.closeConnection();
 }
