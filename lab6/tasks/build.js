@@ -404,7 +404,7 @@ const updateBand = async () => {
 
 
 //main();
-//displayAllBands();
+displayAllBands();
 //getById();
 //deleteById();
 //displayAllAlbums();

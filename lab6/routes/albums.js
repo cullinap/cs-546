@@ -8,28 +8,19 @@ const mongo_queries = data.mongo_queries;
 const { ObjectId } = require("mongodb");
 
 
-async function buildAnAlbum(bandObjectId, albumName, albumYear, albumSongs, rating) {
-    const newAlbum = await albums.create(
-      bandObjectId,
-      albumName,
-      albumYear,
-      albumSongs,
-      rating
-    )
-  
-    const addNewAlbum = await mongo_queries.addAlbum(
-      bandObjectId,
-      newAlbum
-    );
-  
-  }
 
 router.route("/albums/:id").get(async (req, res) => {
   const bandId = req.params.id
+  try {
+    await bands.get(bandId)
+  } catch(e) {
+    res.status(400).json({ error: e });
+    return 
+  }
 
   try {
     const bandJson = await albums.getAll(bandId)
-    res.json(bandJson);
+    res.status(200).json(bandJson);
   } catch (e) {
     res.status(404).json({ error: e });
   }
@@ -77,7 +68,9 @@ router.post("/albums/:id", async (req, res) => {
         ObjectId(req.params.id),
         newAlbum
     );
-    
+
+    console.log(addAlbum)
+
     res.json(await bands.get(req.params.id));
   } catch (e) {
     res.status(500).json({ error: e });
@@ -101,7 +94,7 @@ router.delete("/albums/:id", async (req, res) => {
 
   try {
     const removeAlbum = await albums.remove(req.params.id);
-    res.sendStatus(200);
+    res.status(200).json({ "albumId": req.params.id, "deleted": true });
   } catch (e) {
     res.status(500).json({ error: e });
   }

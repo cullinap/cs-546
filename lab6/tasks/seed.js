@@ -52,7 +52,7 @@ async function main() {
   badmotorfinger = await albums.create(
     bandObjectId,
     "Badmotorfinger",
-    1991,
+    "02/02/1991",
     ["Rusty Cage", "Outshined", "Slaves & Bulldozers", "Jesus Christ Pose"],
     5
   );
@@ -60,7 +60,7 @@ async function main() {
   louderThanLove = await albums.create(
     bandObjectId,
     "Louder Than Love",
-    1989,
+    "02/02/1991",
     ["Ugly Truth", "Hands All Over", "Gun", "Power Trip"],
     5
   );
@@ -97,7 +97,7 @@ async function main() {
   const nevermind = await buildAnAlbum (
     bandObjectId,
     "Nevermind",
-    1991,
+    "02/02/1991",
     ["Smells Like Teen Spirit", "Polly", "Territorial Pissings"],
     5
   )
@@ -105,7 +105,7 @@ async function main() {
   const bleach = await buildAnAlbum (
     bandObjectId,
     "Bleach",
-    1989,
+    "02/02/1991",
     ["Blew", "About a Girl", "Negative Creep"],
     5
   ) 
@@ -135,7 +135,7 @@ async function main() {
   const chimeria = await buildAnAlbum (
     bandObjectId,
     "Chimera",
-    2004,
+    "02/02/1991",
     ["Chimera", "You Must Fall", "My Death"],
     3
   )
@@ -143,7 +143,7 @@ async function main() {
   const daemon = await buildAnAlbum (
     bandObjectId,
     "Daemon",
-    2019,
+    "02/02/1991",
     ["Agenda Ignis", "Bad Blood", "Invoke The Oath"],
     4.5
   ) 
@@ -171,7 +171,7 @@ async function main() {
   const aenima = await buildAnAlbum (
     bandObjectId,
     "Aenima",
-    1996,
+    "02/02/1991",
     ["Aenima", "Jimmy", "Stinkfist"],
     5
   )
@@ -179,7 +179,7 @@ async function main() {
   const lateralus = await buildAnAlbum (
     bandObjectId,
     "Lateralus",
-    2001,
+    "02/02/1991",
     ["The Grudge", "Parabola", "Schism"],
     5
   ) 
@@ -207,7 +207,7 @@ async function main() {
   const aroundTheFur = await buildAnAlbum (
     bandObjectId,
     "Around The Fur",
-    1997,
+    "02/02/1991",
     ["Shove it", "Headup", "Be Quiet and Drive Far Away"],
     4
   )
@@ -215,7 +215,7 @@ async function main() {
   const whitePony = await buildAnAlbum (
     bandObjectId,
     "White Pony",
-    2001,
+    "02/02/1991",
     ["Passenger", "Change", "Back to School"],
     4
   ) 
@@ -243,7 +243,7 @@ async function main() {
   const staticAge = await buildAnAlbum (
     bandObjectId,
     "Static Age",
-    1996,
+    "02/02/1991",
     ["Static Age", "Last Caress", "Hybrid Moments"],
     5
   )
@@ -251,7 +251,7 @@ async function main() {
   const famousMonsters = await buildAnAlbum (
     bandObjectId,
     "Famous Monsters",
-    1998,
+    "02/02/1991",
     ["Scream", "Lost in Space", "Witch Hunt"],
     3
   ) 
@@ -279,7 +279,7 @@ async function main() {
   const battleForDemocracy = await buildAnAlbum (
     bandObjectId,
     "Bedtime for Democracy",
-    1986,
+    "02/02/1991",
     ["I Spy", "Fleshdunce", "Dear Abby"],
     4
   )
@@ -287,7 +287,7 @@ async function main() {
   const plasticSurgergyDisastors = await buildAnAlbum (
     bandObjectId,
     "Plastic Surgery Disastors",
-    1982,
+    "02/02/1991",
     ["Government Flu", "Buzzpop", "Well Paid Scientist"],
     3
   ) 
@@ -314,7 +314,7 @@ async function main() {
   const delousedInTheComatorium = await buildAnAlbum (
     bandObjectId,
     "De-Loused in the Comatorium",
-    2003,
+    "02/02/1991",
     ["Son et lumiere", "Roulette Dares", "This Apparatus Must Be Unearthed"],
     5
   )
@@ -322,8 +322,8 @@ async function main() {
   const francesTheMute = await buildAnAlbum (
     bandObjectId,
     "Frances The Mute",
-    2005,
-    ["The Widow", "Cassandra Gemini"],
+    "02/02/1991",
+    ["The Widow", "Cassandra Gemini", "Another song"],
     4
   ) 
 
@@ -332,7 +332,7 @@ async function main() {
 
   atTheDriveIn = await bands.create(
       "At the Drive In",
-      ["Punk", "experimental"],
+      ["rock", "blues"],
       "http://www.atthedrivein.com",
       "Rise",
       [
@@ -349,7 +349,7 @@ async function main() {
   const relationsshipOfCommand = await buildAnAlbum (
     bandObjectId,
     "Relationship of Command",
-    2000,
+    "02/02/1991",
     ["One Armed Scissor", "Rolodex Propoganda", "Invalid Litter Dept"],
     4
   )
@@ -357,8 +357,8 @@ async function main() {
   const acrobaticTenement = await buildAnAlbum (
     bandObjectId,
     "Acrobatic Tenement",
-    1997,
-    ["Star Slight", "Paid Vacation Time"],
+    "02/02/1991",
+    ["Star Slight", "Paid Vacation Time", "One more song"],
     4
   ) 
 
@@ -385,7 +385,7 @@ async function main() {
   const ledZeppelinOne = await buildAnAlbum (
     bandObjectId,
     "Led Zeppelin",
-    1969,
+    "02/02/1991",
     ["Good Times Bad Times", "Dazed and Confused", "Babe I'm Gonna Leave You"],
     4
   )
@@ -393,7 +393,7 @@ async function main() {
   const ledZeppelinTwo = await buildAnAlbum (
     bandObjectId,
     "Led Zeppelin II",
-    1969,
+    "02/02/1991",
     ["Whole Lotta Love", "The Lemon Song", "Moby Dick"],
     4
   ) 

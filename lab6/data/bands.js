@@ -31,6 +31,8 @@ function formatData(collection, bandIndex) {
     obj["recordLabel"] = collection[bandIndex]["recordLabel"]
     obj["bandMembers"] = collection[bandIndex]["bandMembers"]
     obj["yearFormed"] = collection[bandIndex]["yearFormed"]
+    obj["albums"] = collection[bandIndex]["albums"]
+    obj["overallRating"] = collection[bandIndex]["overallRating"]
 
     return obj
 }

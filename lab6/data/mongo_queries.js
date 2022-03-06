@@ -51,9 +51,7 @@ module.exports = {
 
         return bandCollection
           .updateOne({ _id: id }, { $push: { albums: album } })
-        //   .then(function () {
-        //     return module.exports.getMovie(id);
-        //   });
+      
     },
 
     getOneAlbumIdByBandNameAndAlbum: async function (album) {
