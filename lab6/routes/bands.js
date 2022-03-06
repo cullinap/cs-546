@@ -17,18 +17,35 @@ router.route("/bands").get(async (req, res) => {
 router.post("/bands", async (req, res) => {
   const bandData = req.body;
 
-  // if (!bandData.name) {
-  //   res.status(400).json({ error: 'You must provide blog post title' });
-  //   return;
-  // }
-  // if (!bandData.genre) {
-  //   res.status(400).json({ error: 'You must provide blog post body' });
-  //   return;
-  // }
-  // if (!bandData.wesbite) {
-  //   res.status(400).json({ error: 'You must provide poster ID' });
-  //   return;
-  // }
+  if (!bandData.name || bandData.name.length === 0 || typeof bandData.name !== 'string') {
+    res.status(400).json({ error: 'You must provide name and cant be empty' });
+    return;
+  }
+
+  if (!bandData.genre) {
+    res.status(400).json({ error: 'You must provide genre' });
+    return;
+  }
+
+  if (!bandData.website || bandData.website.length === 0 || typeof bandData.website !== 'string') {
+    res.status(400).json({ error: 'You must provide website and cant be empty' });
+    return;
+  }
+
+  if (!bandData.recordLabel || bandData.recordLabel.length === 0 || typeof bandData.recordLabel !== 'string') {
+    res.status(400).json({ error: 'You must provide recordLabel' });
+    return;
+  }
+
+  if (!bandData.bandMembers) {
+    res.status(400).json({ error: 'You must provide bandMembers' });
+    return;
+  }
+
+  if (!bandData.yearFormed) {
+    res.status(400).json({ error: 'You must provide yearFormed' });
+    return;
+  }
 
   try {
     const { name, genre, website, recordLabel, bandMembers, yearFormed } = bandData;
@@ -40,13 +57,21 @@ router.post("/bands", async (req, res) => {
       bandMembers,
       yearFormed
     );
-    res.json(newBand);
+    res.status(200).json(newBand);
   } catch (e) {
-    res.status(500).json({ error: e });
+    res.status(400).json({ error: e });
   }
 });
 
 router.route("/bands/:id").get(async (req, res) => {
+  const bandId = req.params.id
+  try {
+    await bands.get(bandId)
+  } catch(e) {
+    res.status(400).json({ error: e });
+    return 
+  }
+  
   try {
     const bandById = await bands.get(req.params.id);
     res.json(bandById);
