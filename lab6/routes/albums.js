@@ -64,7 +64,6 @@ router.post("/albums/:id", async (req, res) => {
 
   try {
     const { title, releaseDate, tracks, rating } = albumData
-    console.log(typeof req.params.id)
 
     newAlbum = await albums.create(
         req.params.id,
@@ -79,10 +78,11 @@ router.post("/albums/:id", async (req, res) => {
         newAlbum
     );
     
-    res.json(bands.get(ObjectId(req.params.id)));
+    res.json(await bands.get(req.params.id));
   } catch (e) {
     res.status(500).json({ error: e });
   }
+
 });
 
 
