@@ -14,7 +14,7 @@ router.route("/bands").get(async (req, res) => {
   }
 });
 
-router.post("/bands/:id", async (req, res) => {
+router.post("/bands", async (req, res) => {
   const bandData = req.body;
 
   // if (!bandData.name) {
