@@ -71,10 +71,10 @@ router.route("/bands/:id").get(async (req, res) => {
     res.status(400).json({ error: e });
     return 
   }
-  
+
   try {
     const bandById = await bands.get(req.params.id);
-    res.json(bandById);
+    res.status(200).json(bandById);
   } catch (e) {
     res.status(404).json({ error: e });
   }
