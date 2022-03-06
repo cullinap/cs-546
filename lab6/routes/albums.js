@@ -31,7 +31,7 @@ router.route("/albums/album/:id").get(async (req, res) => {
   
     try {
       const bandJson = await albums.get(albumId)
-      res.json(bandJson);
+      rres.status(200).json(bandJson);
     } catch (e) {
       res.status(404).json({ error: e });
     }
@@ -40,18 +40,10 @@ router.route("/albums/album/:id").get(async (req, res) => {
 router.post("/albums/:id", async (req, res) => {
   const albumData = req.body;
 
-  // if (!bandData.name) {
-  //   res.status(400).json({ error: 'You must provide blog post title' });
-  //   return;
-  // }
-  // if (!bandData.genre) {
-  //   res.status(400).json({ error: 'You must provide blog post body' });
-  //   return;
-  // }
-  // if (!bandData.wesbite) {
-  //   res.status(400).json({ error: 'You must provide poster ID' });
-  //   return;
-  // }
+  if (!albumData.title || !albumData.releaseDate  || !albumData.tracks ) {
+    res.status(400).json({ error: 'You must provide fields' });
+    return;
+  }
 
   try {
     const { title, releaseDate, tracks, rating } = albumData
@@ -71,9 +63,9 @@ router.post("/albums/:id", async (req, res) => {
 
     console.log(addAlbum)
 
-    res.json(await bands.get(req.params.id));
+    res.status(200).json(await bands.get(req.params.id));
   } catch (e) {
-    res.status(500).json({ error: e });
+    res.status(400).json({ error: e });
   }
 
 });

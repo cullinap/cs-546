@@ -2,6 +2,8 @@ const mongoCollections = require('../config/mongoCollections');
 const bands = mongoCollections.bands;
 const { ObjectId } = require("mongodb");
 
+const average = (array) => array.reduce((a, b) => a + b) / array.length;
+
 
 module.exports = {
     getAllBands: async () => {
@@ -42,15 +44,44 @@ module.exports = {
       return band
     },
 
+
+
+    updateOverAllRating: async (id) => {
+      const bandCollection = await bands();
+
+      const getAlbumRatings = await bandCollection
+        .findOne(
+          { _id:Object(id)},
+          { projection: { _id:0, 'albums.rating':1 } }
+        )
+
+      if(getAlbumRatings["albums"].length < 1) {
+        return 0
+      }
+
+      let ratings = []
+      for (let [key,value] of Object.entries(getAlbumRatings)) {
+        for (let [k,v] of Object.entries(value)) {
+          ratings.push(v["rating"])
+        }
+      }
+      
+      return average(ratings)
+    },
+
     addAlbum: async function (id, album) {
         // if (id === undefined) return Promise.reject('No id provided');
         // if (newCastMember === undefined)
         //   return Promise.reject('no newCastMember provided');
         const bandCollection = await bands();
        
+        let calcRating = await this.updateOverAllRating(id)
 
-        return bandCollection
+        const updateAlbums = await bandCollection
           .updateOne({ _id: id }, { $push: { albums: album } })
+
+        const updateReview = await bandCollection
+          .updateOne({ _id: id }, { $set: { overallRating:calcRating } })
       
     },
 

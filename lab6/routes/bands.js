@@ -83,7 +83,7 @@ router.route("/bands/:id").get(async (req, res) => {
 router.put("/bands/:id", async (req, res) => {
   const updatedData = req.body;
 
-  if (!updatedData.name || !updatedData.genre || !updatedData.website) {
+  if (!updatedData.name || !updatedData.genre || !updatedData.website || !updatedData.recordLabel || !updatedData.bandMembers || !updatedData.yearFormed) {
     res.status(400).json({ error: "You must Supply All fields" });
     return;
   }
@@ -91,7 +91,7 @@ router.put("/bands/:id", async (req, res) => {
   try {
     await bands.get(req.params.id);
   } catch (e) {
-    res.status(404).json({ error: "Band not found" });
+    res.status(400).json({ error: e });
     return;
   }
 
@@ -107,7 +107,7 @@ router.put("/bands/:id", async (req, res) => {
     );
     res.json(updatedBand);
   } catch (e) {
-    res.status(500).json({ error: e });
+    res.status(400).json({ error: e });
   }
 });
 

@@ -401,13 +401,30 @@ const updateBand = async () => {
   console.log("Done!");
 }
 
+const getOverAllRating = async () => {
+  console.log("getting overall rating")
+  nirvana = await mongo_queries.getIdBandWithBandName("Nirvana")
+
+  try {
+      const updaDatedBand = await mongo_queries.updateOverAllRating(nirvana);
+      console.log(updaDatedBand);
+    } catch(e) {
+      console.log(e);
+    }
+
+  const db = await connection.connectToDb();
+  await connection.closeConnection();
+  console.log("Done!");
+}
+
 
 
 //main();
-displayAllBands();
+//displayAllBands();
 //getById();
 //deleteById();
 //displayAllAlbums();
 //getSingleAlbumById();
 //removeAlbumById()
 //updateBand()
+getOverAllRating()

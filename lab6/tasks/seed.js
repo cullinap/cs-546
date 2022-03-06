@@ -387,7 +387,7 @@ async function main() {
     "Led Zeppelin",
     "02/02/1991",
     ["Good Times Bad Times", "Dazed and Confused", "Babe I'm Gonna Leave You"],
-    4
+    3
   )
 
   const ledZeppelinTwo = await buildAnAlbum (
@@ -395,7 +395,7 @@ async function main() {
     "Led Zeppelin II",
     "02/02/1991",
     ["Whole Lotta Love", "The Lemon Song", "Moby Dick"],
-    4
+    2
   ) 
 
 
