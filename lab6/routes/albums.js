@@ -4,11 +4,28 @@ const data = require("../data");
 const albums = require("../data/albums");
 const { update } = require("../data/bands");
 const bands = data.bands;
-const mongoQueries = data.mongo_queries;
+const mongo_queries = data.mongo_queries;
+const { ObjectId } = require("mongodb");
+
+
+async function buildAnAlbum(bandObjectId, albumName, albumYear, albumSongs, rating) {
+    const newAlbum = await albums.create(
+      bandObjectId,
+      albumName,
+      albumYear,
+      albumSongs,
+      rating
+    )
+  
+    const addNewAlbum = await mongo_queries.addAlbum(
+      bandObjectId,
+      newAlbum
+    );
+  
+  }
 
 router.route("/albums/:id").get(async (req, res) => {
   const bandId = req.params.id
-  console.log(bandId)
 
   try {
     const bandJson = await albums.getAll(bandId)
@@ -18,78 +35,56 @@ router.route("/albums/:id").get(async (req, res) => {
   }
 });
 
-// router.post("/bands", async (req, res) => {
-//   const bandData = req.body;
+router.route("/albums/album/:id").get(async (req, res) => {
+    const albumId = req.params.id
+  
+    try {
+      const bandJson = await albums.get(albumId)
+      res.json(bandJson);
+    } catch (e) {
+      res.status(404).json({ error: e });
+    }
+  });
 
-//   // if (!bandData.name) {
-//   //   res.status(400).json({ error: 'You must provide blog post title' });
-//   //   return;
-//   // }
-//   // if (!bandData.genre) {
-//   //   res.status(400).json({ error: 'You must provide blog post body' });
-//   //   return;
-//   // }
-//   // if (!bandData.wesbite) {
-//   //   res.status(400).json({ error: 'You must provide poster ID' });
-//   //   return;
-//   // }
+router.post("/albums/:id", async (req, res) => {
+  const albumData = req.body;
 
-//   try {
-//     const { name, genre, website, recordLabel, bandMembers, yearFormed } =
-//       bandData;
-//     const newBand = await bands.create(
-//       name,
-//       genre,
-//       website,
-//       recordLabel,
-//       bandMembers,
-//       yearFormed
-//     );
-//     res.json(newBand);
-//   } catch (e) {
-//     res.status(500).json({ error: e });
-//   }
-// });
+  // if (!bandData.name) {
+  //   res.status(400).json({ error: 'You must provide blog post title' });
+  //   return;
+  // }
+  // if (!bandData.genre) {
+  //   res.status(400).json({ error: 'You must provide blog post body' });
+  //   return;
+  // }
+  // if (!bandData.wesbite) {
+  //   res.status(400).json({ error: 'You must provide poster ID' });
+  //   return;
+  // }
 
-// router.route("/bands/:id").get(async (req, res) => {
-//   try {
-//     const bandById = await bands.get(req.params.id);
-//     res.json(bandById);
-//   } catch (e) {
-//     res.status(404).json({ error: e });
-//   }
-// });
+  try {
+    const { title, releaseDate, tracks, rating } = albumData
+    console.log(typeof req.params.id)
 
-// router.put("/bands/:id", async (req, res) => {
-//   const updatedData = req.body;
+    newAlbum = await albums.create(
+        req.params.id,
+        title,
+        releaseDate,
+        tracks,
+        rating
+    );
 
-//   if (!updatedData.name || !updatedData.genre || !updatedData.website) {
-//     res.status(400).json({ error: "You must Supply All fields" });
-//     return;
-//   }
+    const addAlbum = await mongo_queries.addAlbum(
+        ObjectId(req.params.id),
+        newAlbum
+    );
+    
+    res.json(bands.get(ObjectId(req.params.id)));
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
 
-//   try {
-//     await bands.get(req.params.id);
-//   } catch (e) {
-//     res.status(404).json({ error: "Band not found" });
-//     return;
-//   }
-
-//   try {
-//     const updatedBand = await bands.update(
-//       req.params.id,
-//       updatedData.name,
-//       updatedData.genre,
-//       updatedData.website,
-//       updatedData.recordLabel,
-//       updatedData.bandMembers,
-//       updatedData.yearFormed
-//     );
-//     res.json(updatedBand);
-//   } catch (e) {
-//     res.status(500).json({ error: e });
-//   }
-// });
 
 router.delete("/albums/:id", async (req, res) => {
   if(!req.params.id) {

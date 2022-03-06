@@ -14,7 +14,7 @@ router.route("/bands").get(async (req, res) => {
   }
 });
 
-router.post("/bands", async (req, res) => {
+router.post("/bands/:id", async (req, res) => {
   const bandData = req.body;
 
   // if (!bandData.name) {
@@ -31,8 +31,7 @@ router.post("/bands", async (req, res) => {
   // }
 
   try {
-    const { name, genre, website, recordLabel, bandMembers, yearFormed } =
-      bandData;
+    const { name, genre, website, recordLabel, bandMembers, yearFormed } = bandData;
     const newBand = await bands.create(
       name,
       genre,
