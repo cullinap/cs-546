@@ -117,12 +117,8 @@ module.exports = {
 
         let calcRating = await mongo_queries.updateOverAllRating(id)
 
-        console.log(calcRating)
-
         const updateReview = await bandCollection
           .updateOne({ _id: id }, { $set: { overallRating:calcRating } })
-
-        console.log(updateReview)
 
         if(deleteBand.deletedCount === 0) {
             throw `band does not exist`
