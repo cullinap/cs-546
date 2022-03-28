@@ -1,0 +1,23 @@
+<h1>{{showName}}</h1>
+<article>
+    <img alt="{{showName}}" src={{showImg}}/> 
+    <dl>
+        <dt>Language</dt>
+        <dd>{{showLanguage}}</dd>
+        <dt>Genres</dt>
+        <dd>
+            <ul>
+                {{#each showGenre}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </dd>
+        <dt>Average Rating</dt>
+        <dd>{{showRating.average}}</dd>
+        <dt>Network</dt>
+        <dd>{{showNetwork.name}}</dd>
+        <dt>Summary</dt>
+        <dd>{{showSummary}}</dd>
+    </dl>
+</article>
+<a href="/">Make another search</a>
