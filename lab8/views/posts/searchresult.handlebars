@@ -1,6 +1,7 @@
 <div class="container">
     <div class="item">
-        <h1>Show Finder</h1>
+        <h1>{{title}}</h1>
+        <h2>{{showSearchTerm}}</h2>
         <section>
             {{#if someData}}
             <ul>
@@ -11,9 +12,11 @@
                 {{/each}}
             </ul>
             {{else}}
-                <p class="show-not-found">We're sorry, but no results were found for {showSearchTerm}.</p>
+                <p class="show-not-found">We're sorry, but no results were found for {{showSearchTerm}}.</p>
             {{/if}}
+            <a href="/">Make another search</a>
         </section>
-        <a href="/">Make another search</a>
     </div>    
 </div>
+        
+    

@@ -48,7 +48,11 @@ router.post('/searchshows', async (req, res) => {
 
         const showDataResults = Object.entries(showData).slice(0,5).map(entry => entry[1])
 
-        res.render('posts/searchresult', {someData: showDataResults, title: 'Shows Found'})
+        res.render('posts/searchresult', {
+            someData: showDataResults, 
+            showSearchTerm: req.body.showSearchTerm, 
+            title: 'Shows Found'
+        })
     } catch(e) {
         res.status(404).json({error: 'Not Found'})
     }
