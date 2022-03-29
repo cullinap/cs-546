@@ -1,6 +1,33 @@
-. {
+/* . {
     box-sizing: border-box;
 }
+
+main {
+    max-width: 75%;
+    margin: auto;
+}
+
+
+
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+h5 {
+    font-size: 1.15rem;
+}
+
+h6 {
+    font-size: 1.05rem;
+}
+
+
+ */
 
 html,
 body {
@@ -12,9 +39,15 @@ body {
     font-family: Georgia, 'Cambria','Times New Roman', Times, serif;
 }
 
-main {
-    max-width: 75%;
-    margin: auto;
+.container {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item {
+    width: 30em;
 }
 
 h1,
@@ -35,31 +68,56 @@ h2 {
     font-size: 1.5rem;
 }
 
-h3 {
+p {
+    font-size: 1rem;
+}
+
+.button {
+    font-size: 20px;
+    background-color: #2ea44f;
+    border-radius: 6px;
+}
+
+.form {
+    border-radius: 6px;
+}
+
+.label {
     font-size: 1.5rem;
 }
 
-h4 {
-    font-size: 1.25rem;
+#wrapper {
+    overflow: auto;
+    width: 100%;
+    padding: 1px;
 }
 
-h5 {
-    font-size: 1.15rem;
+.left {
+    display: inline-block;
+    width: 30%;
 }
 
-h6 {
-    font-size: 1.05rem;
+.right {
+    display: inline-block;
+    width: 70%;
+    float: right;
+    box-sizing: border-box;
 }
 
-p {
-    font-size: 1rem;
-    line-height: 2;
+dt {
+    padding:10px;
+    font-size:25px;
 }
 
-.post {
-    width: 75%;
-    border-bottom: 1px dashed #333;
+dd {
+    font-size:20px;
 }
+
+#summary {
+    width: 300px;
+}
+
+
 
 
 

@@ -17,15 +17,6 @@ async function getTvShows(showName) {
     //   throw 'stockname cannot be an empty string or just spaces';
 
     let apiData = await getApiData(tvMazeApiSearchUrl + showName);
-    //let newArr = [];
-
-    // for (const [key, value] of Object.entries(apiData)) {
-    //     if(value["stock_name"] == stockName) newArr.push(value);
-    // }
-
-    // if(newArr.length === 0)
-    //     throw `stock does not exist`
-
 
     return apiData
 }
@@ -36,34 +27,50 @@ async function getTvShowsById(id) {
     return apiData;
 } 
 
+function removeHtml(text) {
+    return text.replaceAll(/<.*?>/g, "");
+}
 
+// router functions
 
 router.get('/', async (req, res) => {
-    res.render('posts/search', {title: 'Show Finder'})
+    try {
+        res.render('posts/search', {title: 'Show Finder'})
+    } catch(e) {
+        res.status(404).json({error: 'Not Found'})
+    }
 })
 
 router.post('/searchshows', async (req, res) => {
-    const showName = req.body.showSearchTerm;
-    const showData = await getTvShows(showName)
+    try {
+        const showName = req.body.showSearchTerm;
+        const showData = await getTvShows(showName)
 
-    const showDataResults = Object.entries(showData).slice(0,5).map(entry => entry[1])
+        const showDataResults = Object.entries(showData).slice(0,5).map(entry => entry[1])
 
-    res.render('posts/searchresult', {someData: showDataResults, title: 'Shows Found'})
+        res.render('posts/searchresult', {someData: showDataResults, title: 'Shows Found'})
+    } catch(e) {
+        res.status(404).json({error: 'Not Found'})
+    }
 })
 
 router.get('/show/:id', async (req, res) => {
-    const showIdData = await getTvShowsById(req.params.id)
-    //res.json(showIdData)
+    try {
+        const showIdData = await getTvShowsById(req.params.id)
+        //res.json(showIdData)
 
-    res.render('posts/individualshow', {
-        showName: showIdData.name, 
-        showImg: showIdData.image.original,
-        showLanguage: showIdData.language,
-        showGenre: showIdData.genres,
-        showRating: showIdData.rating,
-        showNetwork: showIdData.network, 
-        showSummary: showIdData.summary
-    })
+        res.render('posts/individualshow', {
+            showName: showIdData.name, 
+            showImg: showIdData.image.medium,
+            showLanguage: showIdData.language,
+            showGenre: showIdData.genres,
+            showRating: showIdData.rating,
+            showNetwork: showIdData.network, 
+            showSummary: removeHtml(showIdData.summary)
+        })
+    } catch(e) {
+        res.status(404).render('posts/errorpage', {errorId: req.params.id})
+    }
 })
 
 
@@ -73,3 +80,6 @@ module.exports = router;
 // https://stackoverflow.com/questions/22696886/how-to-iterate-over-array-of-objects-in-handlebars
 // https://stackoverflow.com/questions/10377700/limit-results-of-each-in-handlebars-js
 // https://stackoverflow.com/questions/39336556/how-can-i-slice-an-object-in-javascript
+// https://stackoverflow.com/questions/43983591/string-regex-replace-in-node-js
+// https://stackoverflow.com/questions/11229831/regular-expression-to-remove-html-tags-from-a-string
+// https://www.youtube.com/watch?v=e6j5qHTwLkk

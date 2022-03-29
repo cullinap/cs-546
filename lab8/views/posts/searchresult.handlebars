@@ -1,15 +1,19 @@
-<h1>Show Finder</h1>
-<section>
-    {{#if someData}}
-    <ul>
-        {{#each someData}}
-            <li>
-                <a href="/show/{{this.show.id}}">{{this.show.name}}</a>
-            </li>
-        {{/each}}
-    </ul>
-    {{else}}
-        <p class="show-not-found">We're sorry, but no results were found for {showSearchTerm}.</p>
-    {{/if}}
-</section>
-<a href="/">Make another search</a>
+<div class="container">
+    <div class="item">
+        <h1>Show Finder</h1>
+        <section>
+            {{#if someData}}
+            <ul>
+                {{#each someData}}
+                    <li>
+                        <a href="/show/{{this.show.id}}">{{this.show.name}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+            {{else}}
+                <p class="show-not-found">We're sorry, but no results were found for {showSearchTerm}.</p>
+            {{/if}}
+        </section>
+        <a href="/">Make another search</a>
+    </div>    
+</div>

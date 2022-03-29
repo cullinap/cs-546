@@ -1,23 +1,32 @@
-<h1>{{showName}}</h1>
 <article>
-    <img alt="{{showName}}" src={{showImg}}/> 
-    <dl>
-        <dt>Language</dt>
-        <dd>{{showLanguage}}</dd>
-        <dt>Genres</dt>
-        <dd>
-            <ul>
-                {{#each showGenre}}
-                    <li>{{this}}</li>
-                {{/each}}
-            </ul>
-        </dd>
-        <dt>Average Rating</dt>
-        <dd>{{showRating.average}}</dd>
-        <dt>Network</dt>
-        <dd>{{showNetwork.name}}</dd>
-        <dt>Summary</dt>
-        <dd>{{showSummary}}</dd>
-    </dl>
+    <div>
+        <h1>{{showName}}</h1>
+    </div>
+    <div class="wrapper">
+        <div class="left">
+            <img alt="{{showName}}" src="{{showImg}}"/> 
+        </div>
+        
+        <div class="right">
+            <dl>
+                <dt>Language</dt>
+                <dd>{{showLanguage}}</dd>
+                <dt>Genres</dt>
+                <dd id="genre">
+                    <ul>
+                        {{#each showGenre}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </dd>
+                <dt>Average Rating</dt>
+                <dd>{{showRating.average}}</dd>
+                <dt>Network</dt>
+                <dd>{{showNetwork.name}}</dd>
+                <dt>Summary</dt>
+                <dd id="summary">{{showSummary}}</dd>
+            </dl>
+        </div>
+    </div>
 </article>
 <a href="/">Make another search</a>

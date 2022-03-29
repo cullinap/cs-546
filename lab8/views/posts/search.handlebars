@@ -1,14 +1,19 @@
-<title>{{{title}}}</title>
-<h1>Show Finder</h1>
 <article>
-    <p>
-        Hola! Enter a show show you would like to view in the 
-        search bar below.
-    </p>
-    <form method="POST" action="/searchshows">
-        <label> Enter a show:
-            <input type="text" name="showSearchTerm">
-        </label>
-        <button type="submit">search</button>
-    </form>
+    <div class="container">
+        <div class="item">
+            <h1>{{title}}</h1>
+            <p>
+                Hola! Enter a show show you would like to learn more about in the search bar below.
+                Based on your search term the show finder will return up to five results that match
+                the term provided. From these terms you can click on the one you like the best and
+                learn more about that show. 
+            </p>
+            <form method="POST" action="/searchshows">
+                <label class="label" > Enter a show:
+                    <input type="text" name="showSearchTerm">
+                </label>
+                <button class="button" type="submit" >search</button>
+            </form>
+        </div>
+    </div>
 </article>
