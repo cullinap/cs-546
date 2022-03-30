@@ -12,12 +12,6 @@ app.use(express.urlencoded({ extended:true })); // middleware fn for urlencoded 
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' })); // set main layout
 app.set('view engine', 'handlebars'); // view engine to handlebars
 
-var hbs = exphbs.create({});
-
-// register new function
-hbs.handlebars.registerHelper("counter", function (index){
-    return index + 1;
-});
 
 configRoutes(app);
 
