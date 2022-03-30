@@ -10,11 +10,13 @@ async function getApiData(url) {
     return data;
 } 
 
+function checkInput(value) {
+    if(value.trim().length === 0) 
+        return true
+    return false
+}
+
 async function getTvShows(showName) {
-    // if(!stockName) throw `you must provide a stockname`;
-    // if (typeof stockName !== 'string') throw 'stockname must be a string';
-    // if (stockName.trim().length === 0)
-    //   throw 'stockname cannot be an empty string or just spaces';
 
     let apiData = await getApiData(tvMazeApiSearchUrl + showName);
 
@@ -31,6 +33,24 @@ function removeHtml(text) {
     return text.replaceAll(/<.*?>/g, "");
 }
 
+function checkNetwork(value) {
+    if(!value)
+        return 'N/A'
+    return value.name
+}
+
+function checkShowValues(value) {
+    if(!value)
+        return 'N/A'
+    return value
+}
+
+function checkShowImage(img) {
+    if(!img)
+        return "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+    return img.medium
+}
+
 // router functions
 
 router.get('/', async (req, res) => {
@@ -43,6 +63,9 @@ router.get('/', async (req, res) => {
 
 router.post('/searchshows', async (req, res) => {
     try {
+        if(checkInput(req.body.showSearchTerm)){
+            res.status(400).render('posts/error', {msg: 'input must contain values and not be empty'})
+        }
         const showName = req.body.showSearchTerm;
         const showData = await getTvShows(showName)
 
@@ -64,16 +87,17 @@ router.get('/show/:id', async (req, res) => {
         //res.json(showIdData)
 
         res.render('posts/individualshow', {
-            showName: showIdData.name, 
-            showImg: showIdData.image.medium,
-            showLanguage: showIdData.language,
-            showGenre: showIdData.genres,
-            showRating: showIdData.rating,
-            showNetwork: showIdData.network, 
-            showSummary: removeHtml(showIdData.summary)
+            title: checkShowValues(showIdData.name),
+            showName: checkShowValues(showIdData.name), 
+            showImg: checkShowImage(showIdData.image),
+            showLanguage: checkShowValues(showIdData.language),
+            showGenre: checkShowValues(showIdData.genres),
+            showRating: checkShowValues(showIdData.rating.average),
+            showNetwork: checkNetwork(showIdData.network), 
+            showSummary: checkShowValues(removeHtml(showIdData.summary))
         })
     } catch(e) {
-        res.status(404).render('posts/errorpage', {errorId: req.params.id})
+        res.status(404).render('posts/errorpage', {msg: "We're sorry, but no results were found for" + ' ' + req.params.id})
     }
 })
 
