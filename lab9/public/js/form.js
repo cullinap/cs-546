@@ -32,6 +32,7 @@ function isInt(value) {
 function main(){
     let myValue = document.getElementById('myform').value;
 
+
     if (isNaN(myValue) || !isInt(myValue)) {
         alert('you must enter an integer')
         return

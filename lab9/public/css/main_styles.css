@@ -1,7 +1,7 @@
 .is-prime {
-    color: green;
+    color: #00E676;
 }
 
 .not-prime {
-    color: red;
+    color: #FF3D00;
 }
