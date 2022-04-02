@@ -7,16 +7,24 @@ function checkPrimeNumber(number){
     return true
 }
 
-function myValidation(){
-    let myValue = document.getElementById('myform').value;
+function elementPlacer(value, msg) {
+    let ul = document.getElementById('list');
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(value + msg));
+    ul.appendChild(li);
+}
 
-    //isNaN(myValue) || myValue < 1 || myValue > 20
-    // alert(checkPrimeNumber(myValue))
+function main(){
+    let myValue = document.getElementById('myform').value;
+    if (isNaN(myValue)) {
+        alert('you must enter an integer')
+        return
+    }
 
     if (checkPrimeNumber(myValue)) {
-        document.getElementById('demo').innerHTML = myValue + ' ' + 'prime'
+        elementPlacer(myValue, ' is a prime number')
     } else {
-        document.getElementById('demo').innerHTML = myValue + ' ' + 'not prime'
+        elementPlacer(myValue, ' is not a prime number')
     }
 }
 
