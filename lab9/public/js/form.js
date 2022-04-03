@@ -1,5 +1,5 @@
 // alert('connected')
-
+let form = document.querySelector('.form')
 
 function checkPrimeNumber(number){
     if(number == 1 || number == 0)
@@ -29,20 +29,39 @@ function isInt(value) {
     return !isNaN(value) && (x | 0) === x;
 }
 
-function main(){
-    let myValue = document.getElementById('myform').value;
-
-
-    if (isNaN(myValue) || !isInt(myValue)) {
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    let myValue = document.getElementById("prime").value;
+    
+    if(myValue.trim() === "" || !isInt(myValue)) {
         alert('you must enter an integer')
-        return
+        return 
     }
-
+        
     if (checkPrimeNumber(myValue)) {
         elementPlacer(myValue, ' is a prime number', true)
     } else {
         elementPlacer(myValue, ' is not a prime number', false)
     }
-}
+})
+
+
+
+// function main(){
+//     let myValue = document.getElementById('myform').value;
+//     let primeForm = document.getElementById('form')
+
+
+//     if (isNaN(myValue) || !isInt(myValue)) {
+//         alert('you must enter an integer')
+//         return
+//     }
+
+//     if (checkPrimeNumber(myValue)) {
+//         elementPlacer(myValue, ' is a prime number', true)
+//     } else {
+//         elementPlacer(myValue, ' is not a prime number', false)
+//     }
+// }
 
 

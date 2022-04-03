@@ -1,3 +1,41 @@
+html,
+body {
+    font-size: 14pt;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #222;
+    margin-bottom: 5px;
+}
+
+body {
+    background: #dedede;
+    font-family: Georgia, 'Cambria','Times New Roman', Times, serif;
+}
+
+h1 {
+    margin-top:20px;
+    font-size: 2rem;
+}
+
+.container {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:40px;
+}
+
+.item {
+    width: 30em;
+}
+
+
 .is-prime {
     color: #00E676;
 }
@@ -5,3 +43,10 @@
 .not-prime {
     color: #FF3D00;
 }
+
+.button {
+    font-size: 20px;
+    background-color: #2ea44f;
+    border-radius: 6px;
+}
+
