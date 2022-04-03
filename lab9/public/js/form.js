@@ -47,21 +47,6 @@ form.addEventListener('submit', function(event) {
 
 
 
-// function main(){
-//     let myValue = document.getElementById('myform').value;
-//     let primeForm = document.getElementById('form')
 
-
-//     if (isNaN(myValue) || !isInt(myValue)) {
-//         alert('you must enter an integer')
-//         return
-//     }
-
-//     if (checkPrimeNumber(myValue)) {
-//         elementPlacer(myValue, ' is a prime number', true)
-//     } else {
-//         elementPlacer(myValue, ' is not a prime number', false)
-//     }
-// }
 
 
