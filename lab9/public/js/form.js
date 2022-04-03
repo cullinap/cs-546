@@ -4,7 +4,10 @@ let form = document.querySelector('.form')
 function checkPrimeNumber(number){
     if(number == 1 || number == 0)
         return false
-    
+
+    if(number < 0)
+        return false
+
     for(let i = 2, s = Math.sqrt(number); i <= s; ++i)
         if(number % i === 0) return false
     return true
@@ -40,8 +43,10 @@ form.addEventListener('submit', function(event) {
         
     if (checkPrimeNumber(myValue)) {
         elementPlacer(myValue, ' is a prime number', true)
+    } else if (myValue < 0) {
+        alert('Enter a positive integer value')
     } else {
-        elementPlacer(myValue, ' is not a prime number', false)
+        elementPlacer(myValue, ' is NOT a prime number', false)
     }
 })
 
