@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        res.render('posts/prime', {title:'The Prime Number Checker'})
+        res.render('posts/prime', {title:'Prime Number Checker'})
     } catch(e) {
         res.status(404).json({error: 'Not Found'})
     }
