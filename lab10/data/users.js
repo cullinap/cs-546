@@ -6,18 +6,40 @@ const bcrypt = require('bcrypt')
 
 const saltRounds = 10
 
+function formatData(collection, bandIndex) {
+    let obj = {}
+    //obj["_id"] = collection[bandIndex]["_id"].toString()
+    //obj["username"] = collection[bandIndex]["username"]
+    return collection[bandIndex]["username"].toLowerCase()
+
+    //return obj
+}
+
+function makeArray(arr) {
+    let nameArray = []
+    for(let i = 0; i<arr.length; ++i) {
+        nameArray.push(formatData(arr,i))
+    }
+
+    return nameArray;
+}
+
 function userNameCheck(name) {
     let nameRegex = /^[a-zA-Z0-9]{4,30}$/;
     return !nameRegex.test(name)
 }
 
-async function checkUserName(name) {
+async function getAll() {
     const usersCollection = await userData();
     const userList = await usersCollection
-        .findOne({username:name}, {_id:0,username:1} )
-        //.toArray();
-        //{projection: {_id:0, username:1} }
-    return userList;
+        .find({}).toArray();
+    
+    let userArray = []
+    for(let i = 0; i<userList.length; ++i) {
+        userArray.push(formatData(userList,i))
+    }
+
+    return userArray;
 }
 
 // PHILL is not being checked against phill 
@@ -30,12 +52,10 @@ module.exports = {
         const usersCollection = await userData();
         const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-        // console.log(username.toLowerCase())
-        checkName = await checkUserName(username.toLowerCase())
-        console.log(checkName)
-        // if(checkName !== null)
-        //     throw `the username ${username} already exists`
-
+        checkName = await getAll()
+        if(checkName.includes(username.toLowerCase()))
+            throw `username taken`
+      
         let newUser = {
             username: username,
             password: hashedPassword,
