@@ -113,6 +113,46 @@ async function main() {
         console.log(e)
     }
 
+    try {
+        await userData.createUser(
+            'joseph'
+            , 'pwd5a'
+        )
+
+    } catch(e) {
+        console.log(e)
+    }
+
+    try {
+        await userData.createUser(
+            'joseph10'
+            , 'pa$$word'
+        )
+
+    } catch(e) {
+        console.log(e)
+    }
+
+    try {
+        await userData.createUser(
+            'joseph20'
+            , 'pa$$wo rd'
+        )
+
+    } catch(e) {
+        console.log(e)
+    }
+
+    try {
+        await userData.createUser(
+            'pat rick'
+            , 'pa$$word'
+        )
+
+    } catch(e) {
+        console.log(e)
+    }
+
     await connection.closeConnection();
 }
 

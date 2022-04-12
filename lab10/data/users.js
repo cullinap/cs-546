@@ -7,26 +7,17 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10
 
 function formatData(collection, bandIndex) {
-    let obj = {}
-    //obj["_id"] = collection[bandIndex]["_id"].toString()
-    //obj["username"] = collection[bandIndex]["username"]
     return collection[bandIndex]["username"].toLowerCase()
-
-    //return obj
-}
-
-function makeArray(arr) {
-    let nameArray = []
-    for(let i = 0; i<arr.length; ++i) {
-        nameArray.push(formatData(arr,i))
-    }
-
-    return nameArray;
 }
 
 function userNameCheck(name) {
-    let nameRegex = /^[a-zA-Z0-9]{4,30}$/;
+    let nameRegex = /^[a-zA-Z0-9]{4,}$/;
     return !nameRegex.test(name)
+}
+
+function passWordCheck(password) {
+    let nameRegex = /^[\S]{6,}$/;
+    return !nameRegex.test(password)
 }
 
 async function getAll() {
@@ -42,13 +33,13 @@ async function getAll() {
     return userArray;
 }
 
-// PHILL is not being checked against phill 
 module.exports = {
     async createUser(username, password) {
         if(!username) throw `username was not provided`
         if(!password) throw `password was not provided`
         if(userNameCheck(username)) throw `username must be 4 characters or greater and alphanumeric or not contain spaces`
-
+        if(passWordCheck(password)) throw `password must be 6 characters or greater or not contain spaces`
+        
         const usersCollection = await userData();
         const hashedPassword = await bcrypt.hash(password, saltRounds)
 
