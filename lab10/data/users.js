@@ -33,6 +33,13 @@ async function getAll() {
     return userArray;
 }
 
+async function getUser(username) {
+    const usersCollection = await userData();
+    const userList = await usersCollection.findOne({ username: username });
+
+    return userList.password
+}
+
 module.exports = {
     async createUser(username, password) {
         if(!username) throw `username was not provided`
@@ -60,10 +67,25 @@ module.exports = {
         if(!username) throw `username was not provided`
         if(!password) throw `password was not provided`
         if(userNameCheck(username)) throw `username must be 4 characters or greater and alphanumeric or not contain spaces`
+        if(passWordCheck(password)) throw `password must be 6 characters or greater or not contain spaces`
 
+        getPasswordHash = await getUser(username)
 
+        let compareToMatch = false
+        compareToMatch = await bcrypt.compare(password, getPasswordHash);
+
+        // try {
+        //     compareToMatch = await bcrypt.compare(password, getPasswordHash);
+        // } catch (e) {
+        //     throw `not working`
+        // }
+
+        if(compareToMatch) {
+            console.log('the passwords match')
+            return {authenticated: true}
+        } else {
+            throw `Either the username or password is invalid`
+        }
 
     }
-
-
 }

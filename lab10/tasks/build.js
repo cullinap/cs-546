@@ -156,4 +156,43 @@ async function main() {
     await connection.closeConnection();
 }
 
-main() 
+async function userCheck() {
+    const db = await connection.connectToDb();
+    await db.dropDatabase();
+    console.log("checking user") 
+
+    try {
+        await userData.createUser(
+            'josecanseco'
+            , 'password'
+        )
+
+    } catch(e) {
+        console.log(e)
+    }
+
+    try {
+        await userData.checkUser(
+            'josecanseco'
+            , 'password'
+        )
+
+    } catch(e) {
+        console.log(e)
+    }
+
+    try {
+        await userData.checkUser(
+            'josecanseco'
+            , 'notthepassword'
+        )
+
+    } catch(e) {
+        console.log(e)
+    }
+
+    await connection.closeConnection();
+}
+
+//main() 
+userCheck()
