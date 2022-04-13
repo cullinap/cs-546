@@ -36,8 +36,12 @@ async function getAll() {
 async function getUser(username) {
     const usersCollection = await userData();
     const userList = await usersCollection.findOne({ username: username });
-
-    return userList.password
+    
+    if(userList === null){
+        throw `no user with that name`
+    } else {
+        return userList.password
+    }
 }
 
 module.exports = {
@@ -71,17 +75,11 @@ module.exports = {
 
         getPasswordHash = await getUser(username)
 
+    
         let compareToMatch = false
         compareToMatch = await bcrypt.compare(password, getPasswordHash);
 
-        // try {
-        //     compareToMatch = await bcrypt.compare(password, getPasswordHash);
-        // } catch (e) {
-        //     throw `not working`
-        // }
-
         if(compareToMatch) {
-            console.log('the passwords match')
             return {authenticated: true}
         } else {
             throw `Either the username or password is invalid`

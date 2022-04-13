@@ -1,7 +1,7 @@
-const primeNumRoutes = require('./primeNumber');
+const userRoutes = require('./users');
 
 const constructorMethod = (app) => {
-    app.use("/", primeNumRoutes);
+    app.use("/", userRoutes);
   
     app.use("*", (req, res) => {
       res.status(404).json({ error: "Not Found" });
