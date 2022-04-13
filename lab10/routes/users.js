@@ -22,7 +22,7 @@ router.get('/signup', async (req, res) => {
             req.session.user = username;
             res.render('/private', {user: username})
         } else {
-            res.render('posts/signup', {title:'singup'})
+            res.render('posts/signup', {title:'signup'})
         }
     } catch(e) {
         res.status(400).render('posts/signup', {title:'error', error:'provide a valid username or passoword'})
