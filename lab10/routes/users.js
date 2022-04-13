@@ -25,7 +25,7 @@ router.get('/signup', async (req, res) => {
             res.render('posts/signup', {title:'singup'})
         }
     } catch(e) {
-        res.status(400).render('posts/singup', {title:'error', error:'provide a valid username or passoword'})
+        res.status(400).render('posts/signup', {title:'error', error:'provide a valid username or passoword'})
     }
 })
 
