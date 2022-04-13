@@ -28,14 +28,20 @@ app.use('/private', (req, res, next) => {
     next();
 });
 
-app.use((req, res, next) => {
-    if (!req.session.user) {
-      return res.render('posts/login');
-    } 
+app.use( (req, res, next) => {
+    let date = new Date().toUTCString()
+    let reqMethod = req.method
+    let requestRoute = req.method
+
+    if(req.session.user){
+        usersession = true
+    } else {
+        usersession = false
+    }
+
+    console.log(date + " " + reqMethod + " " + requestRoute + " " + usersession)
     next();
 });
-
-
 
 configRoutes(app);
 

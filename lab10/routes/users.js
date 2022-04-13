@@ -7,7 +7,7 @@ const userData = data.userData
 router.get('/', async (req, res) => {
     try {
         if(req.session.user) {
-            return res.redirect("/private")
+            return res.redirect("posts/private")
         } else {
             res.render('posts/login', {title:'Login'})
         }
@@ -20,7 +20,7 @@ router.get('/signup', async (req, res) => {
     try {
         if(req.session.user) {
             req.session.user = username;
-            res.render('posts/private', {user: username})
+            res.render('/private', {user: username})
         } else {
             res.render('posts/signup', {title:'singup'})
         }
