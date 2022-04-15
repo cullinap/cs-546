@@ -1,0 +1,16 @@
+{
+  "name": "cs-546-lab-11",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Patrick Cullinane 10473527",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "express-handlebars": "^6.0.5",
+    "xss": "^1.0.11"
+  }
+}
