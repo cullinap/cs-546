@@ -4,7 +4,7 @@ const path = require('path')
 
 router.get('/', async (req, res) => {
     try {
-        res.sendFile(path.resolve('./static/home.html'))
+        res.sendFile(path.resolve('static/home.html'))
     } catch(e) {
         res.status(404).json({error: 'Not Found'})
     }
